@@ -11,6 +11,11 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.listen(port, "0.0.0.0", () => {
+const server = app.listen(port, "0.0.0.0", () => {
   console.log(`Server listening on port ${port}`);
+});
+
+server.on("error", (err) => {
+  console.error("Failed to start server:", err.message);
+  process.exit(1);
 });
